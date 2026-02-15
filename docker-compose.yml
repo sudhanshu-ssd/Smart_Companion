@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: companion-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - "C:/Users/ssdil/.cache/huggingface:/app/hf_cache"
+    env_file:
+      - .env
+    environment:
+      - HF_HOME=/app/hf_cache
+      - PYTHONUNBUFFERED=1
+      - TZ=Asia/Kolkata
+    restart: always
+
+  # --- THE FRONTEND (Face) ---
+  frontend:
+    build: ./frontend
+    container_name: companion-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules 
+    depends_on:
+      - backend
+    restart: always

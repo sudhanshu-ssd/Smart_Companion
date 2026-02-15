@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+groq
+google-generativeai
+cryptography
+Pillow
+python-multipart

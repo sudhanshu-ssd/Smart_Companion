@@ -1,0 +1,14 @@
+# Secrets
+.env
+secret.key
+*.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+*.ipynb
+
+# Docker/OS
+.DS_Store
