@@ -36,4 +36,6 @@ Repo provides a .env example too:
 TO BUILD AND RUN THE DOCKER IMAGE,USE THESE COMMANDS in root directory(smart_companion):
 
 docker-compose build
+
+
 docker-compose up
