@@ -1,41 +1,33 @@
-# The Smart Companion: Neuro-Inclusive Executive Function Support 🧠✨
+The Smart Companion: Neuro-Inclusive Executive Function Support 🧠✨
+The Smart Companion is an adaptive AI companion built to bridge the "Executive Function Gap" for individuals with ADHD, Autism, and Dyslexia. Unlike generic assistants that add to the noise, this system uses a State-Machine Architecture to filter chaos into "Micro-Wins."
 
-**The Smart Companion** is an advanced AI assistant built to bridge the "Executive Function Gap" for individuals with ADHD, Autism, and Dyslexia. Unlike generic assistants, it uses a custom state-machine architecture to deconstruct overwhelming goals into "Micro-Wins."
+🚀 Key Innovations: The "Smart Companion" Engine
+The backend features a custom execution pipeline designed for neurodivergent stability:
 
-## 🚀 Key Innovation: The Smart Engine
-The project features a custom-built execution pipeline:
-* **Main Turn Function:** Orchestrates the flow between user input and system response.
-* **Event Handler:** Manages asynchronous interactions and state updates.
-* **Custom Scheduler:** Prioritizes tasks based on the user's "Energy Level" and their preferences/routines from their Neuro-Profile.
-* **Executor & Render:** Processes task logic and renders a minimalist, single-task UI to prevent decision fatigue.
+Bio-Rhythm Aware Planning: Automatically identifies the user's "Peak Focus Hours" and schedules high-difficulty tasks to match their energy cycles.
 
----
+Micro-Step Decomposition: A specialized recursive prompt logic that ensures no task ever exceeds a 5-minute duration, preventing "task paralysis."
 
-## 🛠️ Tech Stack
-- **Backend:** FastAPI (Python), SQLite
-- **AI Engines:** Groq (llama-3.1-8b-instant ) & Google AI Studio (Gemini 2.5 Flash)
-- **Frontend:** React + Vite, Tailwind CSS
-- **Typography:** Lexend (Neuro-inclusive toggle)
-- **Security:** Fernet (AES-128) Encryption-at-Rest , PII Masking
+IST Time-Synchronicity: Optimized for local time zones (IST/UTC offset) to ensure routines and notifications hit at the exact right moment, regardless of server location.
 
----
+Dopamine Reactor (Gamification): Integrated XP and Streak system with SQLite persistence to provide immediate rewards for task completion.
 
-## 📦 Installation & Setup (Docker Compose)
+Stateful Memory: A session-based architecture that allows users to "Pause" and "Resume" tasks without losing context during interruptions.
 
-### 1. Prerequisites
-- Docker and Docker Compose installed.
-- API keys for Groq and Google AI Studio.
+🛠️ Tech Stack
+Core: FastAPI (Python)
 
-### 2. Environment Variables
-Create a `.env` file in the root directory like this:
-API_KEY=your_groq_key_here
-GEMINI_API_KEY=your_google_ai_studio_key_here
+AI Orchestration: Groq (Llama 3.1 8B Instant) for high-speed logic & Gemini 1.5 Flash for visual context analysis.
 
-Repo provides a .env example too:
+Database: SQLite with Fernet (AES-128) Encryption-at-Rest for sensitive user data.
 
-TO BUILD AND RUN THE DOCKER IMAGE,USE THESE COMMANDS in root directory(smart_companion):
+Frontend: React + Vite, Tailwind CSS, utilizing the Lexend typeface for maximum readability.
 
-docker-compose build
+⚙️ Architecture Overview
+Surgical PII Masker: Automatically scrubs emails, phone numbers, and IP addresses before they ever reach the LLM.
 
+Intent Extractor: A high-precision classifier that distinguishes between casual conversation, deep planning, and routine updates.
 
-docker-compose up
+The Scheduler: A decision-tree logic that manages UI states (Nudges, Celebrations, or Task Steps).
+
+Database Worker: An asynchronous background checker that monitors the encrypted task queue for upcoming "Nudges."
