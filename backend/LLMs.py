@@ -4,9 +4,13 @@ from dotenv import load_dotenv
 from groq import Groq
 from groq import Groq
 from initstate import user_pfp
-from datetime import datetime, timedelta
 from db import get_planning_context
+from datetime import datetime, timedelta
 
+def get_ist_time():
+    return datetime.utcnow() + timedelta(hours=5, minutes=30)
+
+current_time_str = get_ist_time().strftime("%Y-%m-%d %H:%M")
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -85,11 +89,11 @@ def plan_decompose(user_text, base_user_prompt, model, el):
     
     1. Integrate existing routines into the plan.
     2. Match high-difficulty tasks to the Peak Focus Hour.
-    3. Ensure ALL 'start_time' values are in the FUTURE. If the current time is {datetime.now().strftime('%H:%M')}, 
+    3. Ensure ALL 'start_time' values are in the FUTURE. If the current time is {current_time_str}, 
     do not schedule anything before that.
     4. Return ONLY valid JSON.
     5. key should always be 'plan'.
-    6. "IMPORTANT: The current user time is {datetime.now().strftime('%Y-%m-%d %H:%M')}. Do NOT schedule any task start_time BEFORE this exact minute. If a task is meant to be 'immediate', schedule it for {datetime.now() + timedelta(minutes=1)}."
+    6. "IMPORTANT: The current user time is {current_time_str}. Do NOT schedule any task start_time BEFORE this exact minute. If a task is meant to be 'immediate', schedule it for {get_ist_time() + timedelta(minutes=1)}."
     Output schema: {{ "plan": [ {{ "activity": string, "difficulty": 0-9, "start_time": "YYYY-MM-DD HH:MM" }} ] }}
     """
     prompt = f"{base_user_prompt}Energy: {el}Request: {user_text}"
@@ -181,7 +185,7 @@ def extract_intent(user_text, model):
 
     user_prompt = f"""
     Input: "{user_text}"
-    Today's Date/Time: {datetime.now().strftime("%Y-%m-%d %H:%M")}
+    Today's Date/Time: {current_time_str}
 
     Return JSON with:
     - intent (one of the allowed intents)

@@ -221,7 +221,7 @@ def executor(decision, user_text, state, base_user_prompt, model, el, user_pfp):
             print(f"task-->{item}")
             schedule_future_task(item['start_time'], {
                 "activity": item['activity'], 
-                "difficulty": item['difficulty'],
+                "difficulty": item.get('difficulty', 3),
                 "origin": "day_planning"
             })
             
