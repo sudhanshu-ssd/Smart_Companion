@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { Mic, MicOff, Send, Zap, CheckCircle, Sparkles, X, Heart, Settings, Trophy, Camera, Scan, Eye } from 'lucide-react';
-import ProfilePage from './ProfilePage';
+import ProfilePage from './profilepage';
 
 // 🔱 FONT INJECTION: Lexend is scientifically proven to help with reading focus.
 const fontLink = document.createElement('link');
