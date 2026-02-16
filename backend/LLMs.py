@@ -80,6 +80,8 @@ def decompose_tasks(user_task,base_user_prompt,model):
 
 def plan_decompose(user_text, base_user_prompt, model, el):
     peak_hr, routines = get_planning_context()
+    now_ist = get_ist_time()
+    now_str = now_ist.strftime("%Y-%m-%d %H:%M")
     
     day_planning_prompt = f"""SYSTEM:
     You are a Bio-Rhythm Aware Planner. 
@@ -89,11 +91,11 @@ def plan_decompose(user_text, base_user_prompt, model, el):
     
     1. Integrate existing routines into the plan.
     2. Match high-difficulty tasks to the Peak Focus Hour.
-    3. Ensure ALL 'start_time' values are in the FUTURE. If the current time is {current_time_str}, 
+    3. Ensure ALL 'start_time' values are in the FUTURE. If the current time is {now_str}, 
     do not schedule anything before that.
     4. Return ONLY valid JSON.
     5. key should always be 'plan'.
-    6. "IMPORTANT: The current user time is {current_time_str}. Do NOT schedule any task start_time BEFORE this exact minute. If a task is meant to be 'immediate', schedule it for {get_ist_time() + timedelta(minutes=1)}."
+    6. "IMPORTANT: The current user time is {now_str}. Do NOT schedule any task start_time BEFORE this exact minute. If a task is meant to be 'immediate', schedule it for {get_ist_time() + timedelta(minutes=1)}."
     Output schema: {{ "plan": [ {{ "activity": string, "difficulty": 0-9, "start_time": "YYYY-MM-DD HH:MM" }} ] }}
     """
     prompt = f"{base_user_prompt}Energy: {el}Request: {user_text}"
@@ -133,6 +135,9 @@ def convo(user_input,base_user_prompt,model,state):
     return response
 
 def extract_intent(user_text, model):
+    now_ist = get_ist_time()
+    now_str = now_ist.strftime("%Y-%m-%d %H:%M")
+
     system_prompt = """
     You extract structured meaning from user input.
     You are high precision.
@@ -185,7 +190,7 @@ def extract_intent(user_text, model):
 
     user_prompt = f"""
     Input: "{user_text}"
-    Today's Date/Time: {current_time_str}
+    Today's Date/Time: {now_str}
 
     Return JSON with:
     - intent (one of the allowed intents)
