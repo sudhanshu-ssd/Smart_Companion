@@ -3,7 +3,7 @@ import json
 from cryptography.fernet import Fernet
 from datetime import datetime,timedelta
 from game import advance_step
-from LLMs import decompose_tasks, plan_decompose,convo,extract_intent
+from LLMs import decompose_tasks, plan_decompose,convo,extract_intent,get_ist_time
 from render import render
 from db import check_for_scheduled_tasks, update_db_status, schedule_future_task,save_profile
 from initstate import user_pfp
@@ -232,10 +232,11 @@ def executor(decision, user_text, state, base_user_prompt, model, el, user_pfp):
     elif decision == "routine_management":
         slots = json.loads(extract_intent(user_text, model))
         act = slots.get('action') or slots.get('activity') or "New Routine"
+        now_ist = get_ist_time()
         
         time_val = slots.get('time_of_the_task')
         if time_val and len(time_val) <= 5: 
-            time_val = f"{datetime.now().strftime('%Y-%m-%d')} {time_val}"
+            time_val = f"{now_ist.strftime('%Y-%m-%d')} {time_val}"
             
         schedule_future_task(time_val, {
             "activity": act, 

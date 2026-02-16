@@ -117,7 +117,7 @@ def check_for_scheduled_tasks():
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     
-    now_dt = datetime.now()
+    now_dt = datetime.utcnow() + timedelta(hours=5, minutes=30)
     now_str = now_dt.strftime("%Y-%m-%d %H:%M")
     
     ten_mins_ago = (now_dt - timedelta(minutes=10)).strftime("%Y-%m-%d %H:%M")
