@@ -25,7 +25,10 @@ def advance_step(state):
 
     if state["current_step_index"] >= len(state["active_steps"]):
         steps = state['active_steps']
-        avg_diff = sum(s.get('difficulty', 5) for s in steps) / len(steps)
+        if not steps: # Safety check
+            avg_diff = 5
+        else:
+            avg_diff = sum(s.get('difficulty', 5) for s in steps) / len(steps)
         
         rewards = process_rewards("default_user", avg_diff)
         

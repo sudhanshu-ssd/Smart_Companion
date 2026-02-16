@@ -8,8 +8,20 @@ from LLMs import Demon,base_user_prompt
 from avision import photo_bytes_to_claim
 from initstate import init_state
 from db import get_profile,save_profile
+from contextlib import asynccontextmanager
 
-app = FastAPI(title="The Smart Companion")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # This is the "Master Switch" for your DBs
+    from db import init_db
+    from game import init_gamification_db
+    
+    init_db()               # Creates profiles, tasks, etc.
+    init_gamification_db()  # Creates the user_stats table
+    print("✅ All Systems Nominal: Databases Initialized.")
+    yield
+
+app = FastAPI(title="The Smart Companion", lifespan=lifespan)
 model = Demon()
 
 app.add_middleware(
@@ -45,6 +57,7 @@ DEFAULT_PFP = {
   "sensitive_to_pressure": True,
   "anxiety_with_tasks": True
 }
+
 
 
 @app.get("/")
