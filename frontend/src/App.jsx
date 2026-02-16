@@ -9,7 +9,7 @@ fontLink.href = 'https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;60
 fontLink.rel = 'stylesheet';
 document.head.appendChild(fontLink);
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = import.meta.env.VITE_API_URL || "https://smart-companion-api.onrender.com";
 
 export default function SmartCompanionUI() {
   const [sessionId] = useState(() => localStorage.getItem('soul_sid') || `sid_${Math.random().toString(36).slice(2, 9)}`);
