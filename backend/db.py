@@ -4,13 +4,17 @@ from cryptography.fernet import Fernet
 import json
 from datetime import datetime, timedelta
 
-KEY_FILE = "secret.key"
-if os.path.exists(KEY_FILE):
-    with open(KEY_FILE, "rb") as f:
+SECRET_KEY_ENV = os.getenv("SECRET_KEY")
+
+if SECRET_KEY_ENV:
+    # Use the key from Render's Environment Variables
+    SECRET_KEY = SECRET_KEY_ENV.encode() 
+elif os.path.exists("secret.key"):
+    with open("secret.key", "rb") as f:
         SECRET_KEY = f.read()
 else:
     SECRET_KEY = Fernet.generate_key()
-    with open(KEY_FILE, "wb") as f:
+    with open("secret.key", "wb") as f:
         f.write(SECRET_KEY)
 
 cipher = Fernet(SECRET_KEY)
