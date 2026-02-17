@@ -60,7 +60,7 @@ DEFAULT_PFP = {
 
 
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 async def health_check():
     return {"status": "The Smart Companion", "active_sessions": len(sessions)}
 
