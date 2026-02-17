@@ -64,3 +64,4 @@ docker-compose up
 
 
 DEMO LINK:-[https://smart-companion-coral.vercel.app](https://smart-companion-coral.vercel.app/)
+"Backend is currently on a sleep-on-idle plan—initial request may take 30s to spin up. Subsequent actions will be near-instant."
