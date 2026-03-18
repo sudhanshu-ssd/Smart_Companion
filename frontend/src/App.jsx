@@ -132,7 +132,6 @@ export default function SmartCompanionUI() {
       if (payload === "HEARTBEAT") {
         setIsPulsing(true);
         setTimeout(() => setIsPulsing(false), 1500);
-        return;
       }
 
       handleBackendDecision(res.data.data);
